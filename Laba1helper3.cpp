@@ -179,6 +179,12 @@ int Count()
 	
 	PrintCSV (U, I, outputCSV);
 	
+	fclose (input);
+	fclose (output);
+        fclose (inputDiameter);
+        fclose (outputCSV);
+	
+	
 	return (0);                                                          
 	}
 
