@@ -162,19 +162,20 @@ int Count()
 	float errorRoTotal = (errorRo1 + errorRo2 + errorRo3)/3;
 
 
-	/*fprintf (output,"\nFor length=%dcm\t\t\tFor length=%dcm\t\t\tFor length=%dcm\n\n", l1, l2, l3);
-	fprintf (output,"Ravg=%5.3f Om\t\t\tRavg=%5.3f Om\t\t\tRavg=%5.3f Om\n", Ravg1, Ravg2, Ravg3);
-	fprintf (output,"Rtot=%5.3f Om\t\t\tRtot=%5.3f Om\t\t\tRtot=%5.3f Om\n", Rtotal1, Rtotal2, Rtotal3);
+	
+	fprintf (output,"\nFor length=%dcm\t\t\tFor length=%dcm\t\t\tFor length=%dcm\n\n", Length1, Length2, Length3);
+	fprintf (output,"Ravg=%5.3f Om\t\t\tRavg=%5.3f Om\t\t\tRavg=%5.3f Om\n", resistanceAvg1, resistanceAvg2, resistanceAvg3);
+	fprintf (output,"Rtot=%5.3f Om\t\t\tRtot=%5.3f Om\t\t\tRtot=%5.3f Om\n", rTotal1, rTotal2, rTotal3);
 	fprintf (output,"ErrorRand=%5.3f Om\t\tErrorRand=%5.3f Om\t\tErrorRand=%5.3f Om\n", errorRrandom1, errorRrandom2 , errorRrandom3);
 	fprintf (output,"ErrorSys=%5.3f Om\t\tErrorSys=%5.3f Om\t\tErrorSys=%5.3f Om\n", errorRsystem1, errorRsystem2 , errorRsystem3);
 	fprintf (output,"ErrorTot=%5.3f Om\t\tErrorTot=%5.3f Om\t\tErrorTot=%5.3f Om\n", errorR1, errorR2 , errorR3);
 	fprintf (output,"\n\n\n\t\t\t\tl,cm     Ro,10^(-4)Om*cm     ErrorRo,10^(-4)Om*cm");
-	fprintf (output,"\n\t\t\t     1.  %d         %5.2f\t\t%5.2f", l1, Ro1, errorRo1);
-	fprintf (output,"\n\t\t\t     2.  %d         %5.2f\t\t%5.2f", l2, Ro2, errorRo2);
-	fprintf (output,"\n\t\t\t     3.  %d         %5.2f\t\t%5.2f", l3, Ro3, errorRo3);
-	fprintf (output,"\n\nTotal value resistivity (%3.2f+-%3.2f) * 10^(-4)Om * cm", RoTotal, errorRoTotal); */
+	fprintf (output,"\n\t\t\t     1.  %d         %5.2f\t\t%5.2f", Length1, ro1, errorRo1);
+	fprintf (output,"\n\t\t\t     2.  %d         %5.2f\t\t%5.2f", Length2, ro2, errorRo2);
+	fprintf (output,"\n\t\t\t     3.  %d         %5.2f\t\t%5.2f", Length3, ro3, errorRo3);
+	fprintf (output,"\n\nTotal value resistivity (%3.2f+-%3.2f) * 10^(-4)Om * cm", roTotal, errorRoTotal); 
 	
-	///Sort(U,I);
+	Sort(U,I);
 	
 	PrintCSV (U, I, outputCSV);
 	
@@ -355,23 +356,15 @@ void TotalErrorRo (float ro, float errorR, float rTotal, float* errorRo, float e
 	\param I[]
 	Array for return sorted data of current
 */
-/*void Sort(float U[], float I[])
+void Sort(float U[], float I[])
 	{	
 	
 	float saveU = 0;
 	float saveI = 0;
-	for (int g = 1; g <= NMeas; g++)                                      
-		{
-		Ucopy[g] = 0;
-		Icopy[g] = 0;
-		fscanf (input,"%f %f", &Ucopy[g],&Icopy[g]);
-		U[g] = Ucopy[g];
-		I[g] = Icopy[g];
-        	}
 
-	for (int j = 1; j <= (num - 1); j++)
+	for (int j = 0; j < (NMeas-1); j++)
 		{
-		for (int i = j+1; i <= num; i++)
+		for (int i = j+1; i < NMeas2; i++)
 			{
 			if (U[i]<U[j])
 				{
@@ -391,9 +384,9 @@ void TotalErrorRo (float ro, float errorR, float rTotal, float* errorRo, float e
 	
 	saveU = 0;
 	saveI = 0;
-	for (int j = NMeas2; j <= (2*num - 1); j++)
+	for (int j = NMeas2; j < (NMeas3 - 1); j++)
 		{
-		for (int i = j+1; i <= 2*num; i++)
+		for (int i = j+1; i < NMeas; i++)
 			{
 			if (U[i] < U[j])
 				{
@@ -412,9 +405,9 @@ void TotalErrorRo (float ro, float errorR, float rTotal, float* errorRo, float e
 
 	saveU = 0;
 	saveI = 0;
-	for (int j = NMeas3; j <= (3*num-1) ; j++)
+	for (int j = NMeas3; j < (NMeas-1) ; j++)
 		{
-		for (int i = j+1; i <= NMeas; i++)
+		for (int i = j+1; i < NMeas; i++)
 			{
 			if (U[i] < U[j])
 				{
@@ -432,7 +425,7 @@ void TotalErrorRo (float ro, float errorR, float rTotal, float* errorRo, float e
 		}
 
 	}
-*/
+
 //=============================================================================
 
 /*!
